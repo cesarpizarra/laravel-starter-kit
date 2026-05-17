@@ -1,4 +1,4 @@
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, Link } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
 import { login } from '@/routes';
 import { store } from '@/routes/register';
+import { ArrowRight } from 'lucide-react';
 
 export default function Register() {
     return (
@@ -100,11 +101,24 @@ export default function Register() {
                             </Button>
                         </div>
 
-                        <div className="text-center text-sm text-muted-foreground">
-                            Already have an account?{' '}
-                            <TextLink href={login()} tabIndex={6}>
-                                Log in
-                            </TextLink>
+                        <div className="flex flex-col items-center gap-3">
+                            <div className="flex w-full items-center gap-3 text-xs text-muted-foreground">
+                                <div className="h-px flex-1 bg-border" />
+                                <span className="whitespace-nowrap">
+                                    Already have an account?
+                                </span>
+                                <div className="h-px flex-1 bg-border" />
+                            </div>
+                            <Button
+                                asChild
+                                variant="outline"
+                                className="group flex w-full items-center justify-center gap-2"
+                            >
+                                <Link href={login()}>
+                                    Sign in instead
+                                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                </Link>
+                            </Button>
                         </div>
                     </>
                 )}

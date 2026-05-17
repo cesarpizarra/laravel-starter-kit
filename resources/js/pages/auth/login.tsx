@@ -1,4 +1,4 @@
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, Link } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import AuthLayout from '@/layouts/auth-layout';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
+import { ArrowRight } from 'lucide-react';
 
 type Props = {
     status?: string;
@@ -99,11 +100,24 @@ export default function Login({
                         </div>
 
                         {canRegister && (
-                            <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
-                                <TextLink href={register()} tabIndex={5}>
-                                    Sign up
-                                </TextLink>
+                            <div className="flex flex-col items-center gap-3">
+                                <div className="flex w-full items-center gap-3 text-xs text-muted-foreground">
+                                    <div className="h-px flex-1 bg-border" />
+                                    <span className="whitespace-nowrap">
+                                        Don't have an account?
+                                    </span>
+                                    <div className="h-px flex-1 bg-border" />
+                                </div>
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    className="group flex w-full items-center justify-center gap-2"
+                                >
+                                    <Link href={register()}>
+                                        Create an account
+                                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                    </Link>
+                                </Button>
                             </div>
                         )}
                     </>
