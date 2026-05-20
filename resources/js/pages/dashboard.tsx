@@ -4,6 +4,8 @@ import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
 import StatsCard from '@/components/stats-card';
 import { Clock3, FileText, GraduationCap, Users } from 'lucide-react';
+import UsersChart from '@/components/dashboard/users-chart';
+import RequestsChart from '@/components/dashboard/requests-chart';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -49,6 +51,11 @@ export default function Dashboard() {
                         description="Users online"
                         trend="Live activity"
                     />
+                </div>
+
+                <div className="grid gap-6 p-6 md:grid-cols-2">
+                    <UsersChart />
+                    <RequestsChart />
                 </div>
             </div>
         </AppLayout>
