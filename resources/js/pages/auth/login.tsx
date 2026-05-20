@@ -10,7 +10,8 @@ import AuthLayout from '@/layouts/auth-layout';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff } from 'lucide-react';
+import { useToggle } from '@/hooks/use-toggle';
 
 type Props = {
     status?: string;
@@ -23,6 +24,7 @@ export default function Login({
     canResetPassword,
     canRegister,
 }: Props) {
+    const passwordToggle = useToggle();
     return (
         <AuthLayout
             title="Log in to your account"
@@ -53,7 +55,7 @@ export default function Login({
                                 <InputError message={errors.email} />
                             </div>
 
-                            <div className="grid gap-2">
+                            <div className="relative grid gap-2">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
                                     {canResetPassword && (
@@ -75,6 +77,20 @@ export default function Login({
                                     autoComplete="current-password"
                                     placeholder="Password"
                                 />
+
+                                <Button
+                                    type="button"
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={passwordToggle.toggle}
+                                    className="absolute top-1/2 right-2 h-7 w-7 -translate-y-1/12"
+                                >
+                                    {passwordToggle.isOpen ? (
+                                        <EyeOff className="h-8 w-8" />
+                                    ) : (
+                                        <Eye className="h-8 w-8" />
+                                    )}
+                                </Button>
                                 <InputError message={errors.password} />
                             </div>
 

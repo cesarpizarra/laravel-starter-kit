@@ -11,6 +11,8 @@ import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { edit } from '@/routes/user-password';
 import type { BreadcrumbItem } from '@/types';
+import { useToggle } from '@/hooks/use-toggle';
+import { Eye, EyeOff } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -22,6 +24,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Password() {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
+    const currentPasswordToggle = useToggle();
+    const newPasswordToggle = useToggle();
+    const confirmPasswordToggle = useToggle();
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -61,7 +66,7 @@ export default function Password() {
                     >
                         {({ errors, processing, recentlySuccessful }) => (
                             <>
-                                <div className="grid gap-2">
+                                <div className="relative grid gap-2">
                                     <Label htmlFor="current_password">
                                         Current password
                                     </Label>
@@ -70,18 +75,36 @@ export default function Password() {
                                         id="current_password"
                                         ref={currentPasswordInput}
                                         name="current_password"
-                                        type="password"
+                                        type={
+                                            currentPasswordToggle.isOpen
+                                                ? 'text'
+                                                : 'password'
+                                        }
                                         className="mt-1 block w-full"
                                         autoComplete="current-password"
                                         placeholder="Current password"
                                     />
+
+                                    <Button
+                                        type="button"
+                                        size="icon"
+                                        variant="ghost"
+                                        onClick={currentPasswordToggle.toggle}
+                                        className="absolute top-1/2 right-2 h-7 w-7 -translate-y-1/12"
+                                    >
+                                        {currentPasswordToggle.isOpen ? (
+                                            <EyeOff className="h-8 w-8" />
+                                        ) : (
+                                            <Eye className="h-8 w-8" />
+                                        )}
+                                    </Button>
 
                                     <InputError
                                         message={errors.current_password}
                                     />
                                 </div>
 
-                                <div className="grid gap-2">
+                                <div className="relative grid gap-2">
                                     <Label htmlFor="password">
                                         New password
                                     </Label>
@@ -90,16 +113,33 @@ export default function Password() {
                                         id="password"
                                         ref={passwordInput}
                                         name="password"
-                                        type="password"
+                                        type={
+                                            newPasswordToggle.isOpen
+                                                ? 'text'
+                                                : 'password'
+                                        }
                                         className="mt-1 block w-full"
                                         autoComplete="new-password"
                                         placeholder="New password"
                                     />
 
+                                    <Button
+                                        type="button"
+                                        size="icon"
+                                        variant="ghost"
+                                        onClick={newPasswordToggle.toggle}
+                                        className="absolute top-1/2 right-2 h-7 w-7 -translate-y-1/12"
+                                    >
+                                        {newPasswordToggle.isOpen ? (
+                                            <EyeOff className="h-8 w-8" />
+                                        ) : (
+                                            <Eye className="h-8 w-8" />
+                                        )}
+                                    </Button>
                                     <InputError message={errors.password} />
                                 </div>
 
-                                <div className="grid gap-2">
+                                <div className="relative grid gap-2">
                                     <Label htmlFor="password_confirmation">
                                         Confirm password
                                     </Label>
@@ -107,12 +147,29 @@ export default function Password() {
                                     <Input
                                         id="password_confirmation"
                                         name="password_confirmation"
-                                        type="password"
+                                        type={
+                                            confirmPasswordToggle.isOpen
+                                                ? 'text'
+                                                : 'password'
+                                        }
                                         className="mt-1 block w-full"
                                         autoComplete="new-password"
                                         placeholder="Confirm password"
                                     />
 
+                                    <Button
+                                        type="button"
+                                        size="icon"
+                                        variant="ghost"
+                                        onClick={confirmPasswordToggle.toggle}
+                                        className="absolute top-1/2 right-2 h-7 w-7 -translate-y-1/12"
+                                    >
+                                        {confirmPasswordToggle.isOpen ? (
+                                            <EyeOff className="h-8 w-8" />
+                                        ) : (
+                                            <Eye className="h-8 w-8" />
+                                        )}
+                                    </Button>
                                     <InputError
                                         message={errors.password_confirmation}
                                     />

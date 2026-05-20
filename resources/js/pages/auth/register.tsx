@@ -1,6 +1,5 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import InputError from '@/components/input-error';
-import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,9 +7,13 @@ import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
 import { login } from '@/routes';
 import { store } from '@/routes/register';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff } from 'lucide-react';
+import { useToggle } from '@/hooks/use-toggle';
 
 export default function Register() {
+    const passwordToggle = useToggle();
+    const confirmPasswordToggle = useToggle();
+
     return (
         <AuthLayout
             title="Create an account"
@@ -58,33 +61,69 @@ export default function Register() {
                                 <InputError message={errors.email} />
                             </div>
 
-                            <div className="grid gap-2">
+                            <div className="relative grid gap-2">
                                 <Label htmlFor="password">Password</Label>
                                 <Input
                                     id="password"
-                                    type="password"
+                                    type={
+                                        passwordToggle.isOpen
+                                            ? 'text'
+                                            : 'password'
+                                    }
                                     required
                                     tabIndex={3}
                                     autoComplete="new-password"
                                     name="password"
                                     placeholder="Password"
                                 />
+                                <Button
+                                    type="button"
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={passwordToggle.toggle}
+                                    className="absolute top-1/2 right-2 h-7 w-7 -translate-y-1/5"
+                                >
+                                    {passwordToggle.isOpen ? (
+                                        <EyeOff className="h-8 w-8" />
+                                    ) : (
+                                        <Eye className="h-8 w-8" />
+                                    )}
+                                </Button>
+
                                 <InputError message={errors.password} />
                             </div>
 
-                            <div className="grid gap-2">
+                            <div className="relative grid gap-2">
                                 <Label htmlFor="password_confirmation">
                                     Confirm password
                                 </Label>
                                 <Input
                                     id="password_confirmation"
-                                    type="password"
+                                    type={
+                                        confirmPasswordToggle.isOpen
+                                            ? 'text'
+                                            : 'password'
+                                    }
                                     required
                                     tabIndex={4}
                                     autoComplete="new-password"
                                     name="password_confirmation"
                                     placeholder="Confirm password"
                                 />
+
+                                <Button
+                                    type="button"
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={confirmPasswordToggle.toggle}
+                                    className="absolute top-1/2 right-2 h-7 w-7 -translate-y-1/5"
+                                >
+                                    {confirmPasswordToggle.isOpen ? (
+                                        <EyeOff className="h-8 w-8" />
+                                    ) : (
+                                        <Eye className="h-8 w-8" />
+                                    )}
+                                </Button>
                                 <InputError
                                     message={errors.password_confirmation}
                                 />
