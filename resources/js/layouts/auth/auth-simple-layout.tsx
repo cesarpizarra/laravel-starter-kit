@@ -11,7 +11,7 @@ export default function AuthSimpleLayout({
         <div className="grid min-h-screen grid-cols-1 bg-background md:grid-cols-2">
             <div className="relative hidden flex-col justify-between border-r bg-muted/40 p-10 text-foreground md:flex">
                 <div className="flex items-center gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-xl border bg-background">
+                    <div className="flex size-10 items-center justify-center rounded-xl border bg-white">
                         <AppLogoIcon className="size-6 text-foreground" />
                     </div>
                     <span className="text-lg font-semibold text-foreground">
@@ -40,8 +40,8 @@ export default function AuthSimpleLayout({
                     <div className="flex h-screen w-full items-center justify-center">
                         <div className="w-full max-w-md space-y-6">
                             <div className="space-y-2 text-center">
-                                <div className="mx-auto flex size-12 items-center justify-center rounded-xl bg-foreground text-background">
-                                    <AppLogoIcon className="size-6 fill-current" />
+                                <div className="mx-auto flex size-12 items-center justify-center rounded-xl border bg-white">
+                                    <AppLogoIcon className="size-6 text-foreground" />
                                 </div>
 
                                 <h1 className="text-2xl font-semibold text-foreground">
